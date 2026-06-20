@@ -22,7 +22,7 @@ public class User {
     @Column(name = "name")
     private String username;
 
-    @Column(name = "card")
+    @Column(name = "card", unique = true)
     private String card;
 
     @Column(name = "email")
