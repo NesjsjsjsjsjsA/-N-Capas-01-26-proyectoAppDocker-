@@ -22,10 +22,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleResponse getRoleByName(String name) {
-        RoleResponse role = roleRepository.findByName(name);
-        if (role == null)
-            throw new ResourceNotFoundException("Role not found");
-
-        return role;
+        return roleMapper.toDto(
+                roleRepository.findByName(name)
+                        .orElseThrow(() -> new ResourceNotFoundException("Role Not Found"))
+        );
     }
 }

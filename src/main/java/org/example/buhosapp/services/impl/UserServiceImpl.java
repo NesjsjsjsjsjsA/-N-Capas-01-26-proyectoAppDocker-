@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse createUser(CreateUserRequest createUserRequest, String role) {
         RoleResponse roleResponse = roleService.getRoleByName(role);
-        System.out.println(roleResponse);
         return userMapper.toDto(
                 userRepository.save(
                         userMapper.toEntityCreate(createUserRequest, roleMapper.toEntity(roleResponse))
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse getUserById(UUID id) {
         return userMapper.toDto(userRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("UserNotFound")
+                () -> new ResourceNotFoundException("User Not Found")
         ));
     }
 }
