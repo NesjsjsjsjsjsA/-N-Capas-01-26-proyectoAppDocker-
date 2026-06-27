@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BuhosAppApplication {
 
+    //Iyhs bBUHOS time!!!
     public static void main(String[] args) {
         SpringApplication.run(BuhosAppApplication.class, args);
     }
