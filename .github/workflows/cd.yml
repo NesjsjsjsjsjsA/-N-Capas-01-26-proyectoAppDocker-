@@ -1,6 +1,7 @@
 name: Deploy on Docker Hub
 
 on:
+  # cuando se haga push a main
   push:
     branches: [ "main" ]
   workflow_dispatch:
@@ -12,7 +13,7 @@ jobs:
     steps:
       - name: code-checkout
         uses: actions/checkout@v4
-
+      # Se encarga de iniciar sesion en Docker hub
       - name: Login Docker Hub
         uses: docker/login-action@v3
         with:

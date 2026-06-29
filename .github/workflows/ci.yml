@@ -1,17 +1,25 @@
 name: Merge to develop & main
 
+# Le indica cuando se va a ejecutar este archivo
 on:
   push:
     branches: ["main", "develop"]
   pull_request:
     branches: ["main", "develop"]
 
+# El trabajo que realiza si se realiza una de las anteriores acciones
 jobs:
+  # Nombre del trabajo, puede ponerse cualquier nombre
   build-and-test:
+    # Levanta una maquina virtual de ubuntu
     runs-on: ubuntu-latest
 
+    # Pasos que va a realizar
     steps:
+      # Nombre del paso que se realizara
       - name: code-checkout
+        # Direccion de un repositorio que se encarga de realizar ciertos pasos
+        # dependiendo de la version
         uses: actions/checkout@v4
 
       - name: JDK-configuration
@@ -22,8 +30,10 @@ jobs:
           cache: maven
 
       - name: Build + Tests
+        # Ejecuta el proyecto, los test y lo empaqueta
         run: ./mvnw clean verify -B
 
+        # Crea reportes de los test
       - name: publish tests reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -38,6 +48,7 @@ jobs:
       - name: code-checkout
         uses: actions/checkout@v4
 
+        # Prueba en levantar la app, por lo que crea un .env de prueba
       - name: Create test .env
         run: |
           cat <<END > .env
